@@ -1,0 +1,42 @@
+# ─── Segredos (NUNCA versionar) ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+credentials.json
+secrets/
+
+# ─── Dados de produção / pessoais (LGPD) ────────────────────────────────────
+backups/
+exports/private/
+logs/
+data/private/
+executions/
+customer-data/
+conversations/
+database-dumps/
+
+# ─── Exportações brutas do n8n (antes da sanitização) ───────────────────────
+automation/n8n/workflows/*.raw.json
+automation/n8n/.staging/
+
+# ─── Node ───────────────────────────────────────────────────────────────────
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ─── Sistema / editor ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

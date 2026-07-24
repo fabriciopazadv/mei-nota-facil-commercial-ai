@@ -1,0 +1,26 @@
+{
+  "ambiente": "production",
+  "descricao": "Operação real. Toda alteração exige aprovação humana e plano de reversão.",
+  "envio_real_de_mensagens": true,
+  "escrita_no_hubspot": true,
+  "hubspot_alvo": "portal_51640620",
+  "chamadas_de_ia": true,
+  "dados_permitidos": "reais",
+  "kill_switch_padrao": false,
+  "log_verboso": false,
+  "exige_aprovacao_para": [
+    "importar_workflow",
+    "alterar_propriedade_do_hubspot",
+    "alterar_politica_comercial",
+    "alterar_prompt",
+    "alterar_limite_de_custo",
+    "enviar_campanha"
+  ],
+  "regras": [
+    "Nenhuma importação sem backup verificado.",
+    "Nenhuma alteração sem teste prévio em staging.",
+    "Nenhuma implantação sem plano de rollback escrito.",
+    "Log sempre mascarado.",
+    "Verificação obrigatória nos 30 minutos seguintes a cada implantação."
+  ]
+}

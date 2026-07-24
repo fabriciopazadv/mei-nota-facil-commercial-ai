@@ -1,0 +1,40 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "aprovado_por": null,
+  "status": "aguardando_decisao_do_proprietario",
+  "descricao": "Política de extensão do teste gratuito. Nasce em ZERO: sem decisão do proprietário, a IA não estende nada.",
+  "trial_padrao_dias": 31,
+  "observacao_importante": "No SaaS atual o trial só começa quando a pessoa vincula o pagamento no checkout. Quem se cadastra e não passa pelo checkout NÃO está em trial — está no estado 'sem_trial'. Extensão não se aplica a esse estado; o caminho ali é ajudar a concluir o checkout.",
+  "autonomia_ia": {
+    "extensao_maxima_dias": 0,
+    "pode_estender_sem_aprovacao": false,
+    "limite_por_contato": 0
+  },
+  "criterios_sugeridos_para_o_proprietario_definir": {
+    "_comentario": "Sugestão técnica. Não está ativo.",
+    "extensao_maxima_dias": 7,
+    "elegibilidade": {
+      "score_ativacao_minimo": 40,
+      "usou_pelo_menos_uma_funcao_principal": true,
+      "nunca_recebeu_extensao": true,
+      "trial_ainda_vigente_ou_expirado_ha_no_maximo_dias": 3,
+      "sem_pedido_de_cancelamento": false
+    },
+    "justificativa": "Estender para quem já demonstrou ativação tende a converter; estender para quem nunca usou apenas adia a perda."
+  },
+  "sempre_exige_aprovacao_humana": [
+    "extensão acima do limite configurado",
+    "segunda extensão para o mesmo contato",
+    "extensão para contato com pedido de cancelamento",
+    "extensão para contato inadimplente",
+    "extensão por prazo indeterminado"
+  ],
+  "registro_obrigatorio": [
+    "quem recebeu",
+    "quantos dias",
+    "qual critério permitiu",
+    "quem aprovou (se aplicável)",
+    "resultado: converteu ou não"
+  ]
+}

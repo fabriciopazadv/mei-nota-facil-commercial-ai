@@ -1,0 +1,93 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "proposto",
+  "descricao": "Matriz de autonomia. O critério que separa os níveis é REVERSIBILIDADE, não complexidade. Verificada em código antes da execução — nunca confiada ao prompt. Ver ADR-007.",
+  "regra_do_silencio": {
+    "silencio_aprova": false,
+    "descricao": "Sem resposta dentro do prazo, a ação NÃO executa e é registrada como não aprovada.",
+    "prazo_padrao_horas": 24
+  },
+  "autonomia_total": {
+    "descricao": "Reversível, sem custo, dentro da política. Executa sem aprovação.",
+    "acoes": [
+      "responder_duvida_coberta_pela_base_de_conhecimento",
+      "registrar_contato",
+      "atualizar_propriedade_do_contato",
+      "criar_tarefa_humana",
+      "classificar_lead",
+      "calcular_scores",
+      "enviar_link_oficial_de_cadastro",
+      "enviar_link_oficial_de_pagamento",
+      "acompanhar_trial",
+      "realizar_onboarding",
+      "enviar_lembrete_autorizado",
+      "produzir_relatorio",
+      "identificar_oportunidade",
+      "detectar_risco",
+      "interromper_sequencia",
+      "solicitar_avaliacao",
+      "registrar_objecao",
+      "registrar_motivo_de_cancelamento",
+      "encaminhar_para_humano"
+    ]
+  },
+  "autonomia_limitada": {
+    "descricao": "Reversível, custo baixo, dentro de limite configurado. Executa se o limite permitir; fora dele vira aprovação.",
+    "acoes": {
+      "conceder_extensao_de_trial": { "limite_em": "config/commercial-rules/trial-extension-policy.json", "limite_atual": 0 },
+      "oferecer_desconto_pre_aprovado": { "limite_em": "config/commercial-rules/discount-policy.json", "limite_atual": 0 },
+      "escolher_entre_templates_aprovados": { "limite_em": "prompts/templates/" },
+      "definir_prioridade_de_atendimento": { "limite_em": null },
+      "selecionar_melhor_horario_de_contato": { "limite_em": "config/commercial-rules/contact-frequency.json" },
+      "sugerir_mudanca_de_campanha": { "limite_em": null, "observacao": "sugerir, não executar" },
+      "reativar_contato_inativo": { "limite_em": "config/commercial-rules/retention-rules.json" }
+    }
+  },
+  "aprovacao_humana_obrigatoria": {
+    "descricao": "Irreversível, com custo, ou de efeito jurídico. NUNCA executa sem aprovação registrada.",
+    "acoes": [
+      "alterar_preco",
+      "criar_plano",
+      "aumentar_orcamento",
+      "publicar_campanha_paga",
+      "enviar_campanha_em_massa",
+      "conceder_desconto_fora_da_politica",
+      "conceder_reembolso",
+      "responder_ameaca_judicial",
+      "fazer_afirmacao_fiscal_ou_juridica_sensivel",
+      "alterar_termos_de_uso",
+      "excluir_dados",
+      "bloquear_usuario",
+      "contratar_servico",
+      "gerar_custo_novo",
+      "acessar_informacao_excessivamente_sensivel",
+      "modificar_politica_de_privacidade",
+      "importar_workflow_em_producao",
+      "alterar_propriedade_do_hubspot_em_producao",
+      "alterar_esta_matriz_de_autonomia",
+      "alterar_pesos_de_lead_scoring"
+    ]
+  },
+  "aprovadores": {
+    "comercial": ["proprietario"],
+    "custo": ["proprietario"],
+    "juridico": ["a_definir"],
+    "tecnico": ["proprietario"]
+  },
+  "conteudo_obrigatorio_da_solicitacao": [
+    "o_que_se_pretende_fazer",
+    "para_quem",
+    "por_que",
+    "qual_regra_disparou",
+    "custo_estimado",
+    "o_que_acontece_se_ninguem_responder",
+    "prazo"
+  ],
+  "regras": [
+    "A verificação acontece em código, antes da execução — nunca é confiada ao prompt.",
+    "A IA não aprova a própria ação.",
+    "Alterar esta matriz exige aprovação humana e pull request revisado.",
+    "Na dúvida sobre o nível, trata-se como aprovação obrigatória."
+  ]
+}

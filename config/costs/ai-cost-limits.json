@@ -1,0 +1,74 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "proposto",
+  "moeda": "USD",
+  "descricao": "Tetos de custo de IA e roteamento de modelo. Ao atingir o teto, o sistema cai para template determinístico — nunca fica mudo e nunca improvisa.",
+  "tetos": {
+    "diario_usd": 2.0,
+    "mensal_usd": 40.0,
+    "por_conversa_usd": 0.05,
+    "observacao": "Valores iniciais conservadores. Com plano de R$ 14,99/mês, US$ 40/mês equivale a aproximadamente 15 assinantes só para cobrir o custo de IA."
+  },
+  "alertas_percentuais": [50, 80, 100],
+  "comportamento_ao_atingir_teto": {
+    "acao": "fallback_deterministico",
+    "descricao": "Para de chamar IA. Usa template aprovado quando existir; sem template, cria tarefa humana.",
+    "nunca": ["ficar_sem_responder", "improvisar_sem_modelo", "ignorar_o_teto"]
+  },
+  "roteamento": {
+    "sem_ia": {
+      "descricao": "Resolvido por regra, filtro, consulta, cálculo, template ou correspondência exata. Custo zero.",
+      "casos": [
+        "decisao_sobre_estado_conhecido",
+        "calculo_de_score",
+        "selecao_de_template_por_estado",
+        "verificacao_de_consentimento",
+        "verificacao_de_frequencia",
+        "agendamento",
+        "deteccao_de_palavra_de_opt_out",
+        "normalizacao_de_telefone"
+      ]
+    },
+    "modelo_simples": {
+      "variavel_env": "AI_MODEL_SIMPLE",
+      "casos": [
+        "classificacao_de_intencao",
+        "extracao_de_dados_de_frase",
+        "resumo_curto",
+        "analise_simples_de_sentimento",
+        "desempate_de_template"
+      ],
+      "max_tokens_saida": 512,
+      "max_tokens_contexto": 4000
+    },
+    "modelo_avancado": {
+      "variavel_env": "AI_MODEL_ADVANCED",
+      "casos": [
+        "objecao_complexa",
+        "conflito_de_informacoes",
+        "avaliacao_estrategica",
+        "analise_de_conversa_longa",
+        "elaboracao_de_campanha",
+        "situacao_excepcional"
+      ],
+      "max_tokens_saida": 2048,
+      "max_tokens_contexto": 16000
+    }
+  },
+  "otimizacoes_obrigatorias": {
+    "cache_de_respostas": { "ativo": true, "ttl_horas": 24, "aplica_a": ["duvidas_frequentes", "classificacao_de_intencao"] },
+    "contexto_resumido": { "ativo": true, "max_mensagens_historico": 10 },
+    "deduplicacao": { "ativo": true, "descricao": "Pergunta idêntica do mesmo contato em curto intervalo reaproveita a resposta." },
+    "processamento_em_lote": { "ativo": true, "aplica_a": ["relatorios", "recalculo_de_scores"] },
+    "limite_de_tokens": { "ativo": true }
+  },
+  "custo_por_modelo": {
+    "_comentario": "Preencher com os preços vigentes na data da configuração. Nenhum valor de custo fica embutido em código.",
+    "status": "nao_confirmado",
+    "fonte": null,
+    "modelos": {}
+  },
+  "alerta_cac_reais": 30.0,
+  "observacao_cac": "Com plano mensal de R$ 14,99, um CAC de R$ 30 leva 2 meses só para se pagar — sem contar churn. Ver docs/commercial-ai/11-custos.md §5."
+}

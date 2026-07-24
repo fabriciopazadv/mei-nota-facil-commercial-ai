@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# Somente leitura. Este CI nunca implanta, nunca envia mensagem, nunca toca
+# no HubSpot, no WhatsApp ou em produção. Ver docs/commercial-ai/12-deploy.md §4.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Verificações
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificação de tipos
+        run: npm run typecheck
+
+      - name: Testes
+        run: npm test
+
+      - name: Validar políticas comerciais
+        run: npm run validate:config
+
+      - name: Validar workflows do n8n
+        run: npm run validate:workflows
+
+      - name: Validar prompts
+        run: npm run validate:prompts
+
+      # Falha aqui bloqueia o merge. Ver SECURITY.md §7.
+      - name: Varredura de segredos e dados pessoais
+        run: npm run security:check
+
+  auditoria:
+    name: Auditoria de dependências
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: npm audit
+        run: npm audit --audit-level=high

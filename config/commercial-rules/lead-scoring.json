@@ -1,0 +1,98 @@
+{
+  "$schema": "./_schemas/lead-scoring.schema.json",
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "aprovado_por": null,
+  "status": "proposto",
+  "descricao": "Três scores independentes e transparentes. A IA lê estes pesos; não os altera. Toda mudança exige pull request revisado pelo proprietário.",
+  "escala": { "minimo": 0, "maximo": 100 },
+  "scores": {
+    "intencao_compra": {
+      "descricao": "Quão perto de assinar. Alimenta priorização do Agente de Conversão.",
+      "inicial": 0,
+      "pesos": {
+        "registration_completed": 10,
+        "business_profile_completed": 10,
+        "first_client_created": 10,
+        "first_budget_created": 15,
+        "first_receipt_created": 15,
+        "nfse_started": 20,
+        "nfse_completed": 10,
+        "contract_analysis_completed": 15,
+        "premium_feature_viewed": 5,
+        "checkout_started": 30,
+        "resposta_positiva_whatsapp": 20,
+        "payment_failed": 10,
+        "user_inactive_7_days": -15,
+        "user_inactive_15_days": -30,
+        "trial_expired": -20
+      }
+    },
+    "ativacao": {
+      "descricao": "Quanto o usuário realmente usa o produto. Alimenta onboarding e retenção.",
+      "inicial": 0,
+      "pesos": {
+        "email_verified": 5,
+        "business_profile_completed": 10,
+        "first_client_created": 10,
+        "first_budget_created": 15,
+        "first_receipt_created": 15,
+        "first_expense_created": 5,
+        "first_revenue_created": 5,
+        "nfse_completed": 20,
+        "contract_analysis_completed": 15,
+        "user_inactive_3_days": -5,
+        "user_inactive_7_days": -15,
+        "user_inactive_15_days": -30
+      },
+      "marcos": {
+        "cadastrado": 0,
+        "explorando": 20,
+        "ativado": 40,
+        "engajado": 70
+      }
+    },
+    "risco_cancelamento": {
+      "descricao": "Probabilidade de perder o cliente. Alimenta o Agente de Retenção.",
+      "inicial": 0,
+      "pesos": {
+        "cancellation_requested": 50,
+        "payment_failed": 20,
+        "user_inactive_15_days": 25,
+        "user_inactive_7_days": 12,
+        "user_inactive_3_days": 5,
+        "support_requested": 5,
+        "nps_detrator": 20,
+        "reclamacao_registrada": 25,
+        "objecao_preco": 10,
+        "payment_approved": -30,
+        "nfse_completed": -15,
+        "first_receipt_created": -10,
+        "nps_promotor": -20
+      },
+      "faixas": {
+        "baixo": [0, 29],
+        "medio": [30, 49],
+        "alto": [50, 74],
+        "critico": [75, 100]
+      },
+      "acao_por_faixa": {
+        "baixo": "nenhuma",
+        "medio": "conteudo_educativo",
+        "alto": "contato_retencao",
+        "critico": "tarefa_humana_prioridade_alta"
+      }
+    }
+  },
+  "decaimento": {
+    "descricao": "Sinais antigos pesam menos. Evita score alto eternizado por um evento de meses atrás.",
+    "meia_vida_dias": 30,
+    "aplica_a": ["intencao_compra"]
+  },
+  "regras": [
+    "A IA NUNCA altera estes pesos.",
+    "Toda alteração exige pull request revisado e aprovado pelo proprietário.",
+    "A versão usada em cada cálculo é gravada em mnf_score_versao no HubSpot.",
+    "Score não nega serviço, não altera preço e não bloqueia acesso — apenas prioriza."
+  ]
+}

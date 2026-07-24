@@ -1,0 +1,31 @@
+{
+  "name": "mei-nota-facil-commercial-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sistema Comercial Autônomo de IA do MEI Nota Fácil — orquestração de aquisição, atendimento, conversão e retenção.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "validate:config": "tsx scripts/validate-workflows/validateConfig.ts",
+    "validate:workflows": "tsx scripts/validate-workflows/validateWorkflows.ts",
+    "validate:prompts": "tsx scripts/validate-prompts/validatePrompts.ts",
+    "security:check": "tsx scripts/security-check/scanSecrets.ts",
+    "n8n:export": "tsx scripts/export-n8n/exportWorkflows.ts",
+    "n8n:import": "tsx scripts/import-n8n/importWorkflows.ts",
+    "check": "npm run typecheck && npm run test && npm run validate:config && npm run validate:workflows && npm run validate:prompts && npm run security:check"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.10"
+  }
+}

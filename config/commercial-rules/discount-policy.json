@@ -1,0 +1,53 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "aprovado_por": null,
+  "status": "aguardando_decisao_do_proprietario",
+  "descricao": "Política de desconto. Nasce em ZERO deliberadamente: enquanto o proprietário não definir limites, a IA não oferece desconto algum. Isso é seguro, não conveniente.",
+  "planos": {
+    "mensal": { "valor_centavos": 1499, "moeda": "BRL" },
+    "semestral": { "valor_centavos": 6999, "moeda": "BRL", "equivalente_mensal_centavos": 1166 }
+  },
+  "autonomia_ia": {
+    "desconto_maximo_percentual": 0,
+    "desconto_maximo_centavos": 0,
+    "pode_oferecer_sem_aprovacao": false,
+    "justificativa": "Ticket de R$ 14,99/mês não comporta desconto sem análise de CAC. Ver docs/commercial-ai/11-custos.md §5."
+  },
+  "condicoes_pre_aprovadas": [],
+  "exemplo_de_condicao_futura": {
+    "_comentario": "Modelo para o proprietário preencher. Não está ativo.",
+    "id": "exemplo-nao-ativo",
+    "ativo": false,
+    "nome": "Desconto na migração para o plano semestral",
+    "tipo": "percentual",
+    "valor": 0,
+    "aplica_a": ["semestral"],
+    "elegibilidade": {
+      "estagio_minimo": "trial_iniciado",
+      "score_intencao_minimo": 50,
+      "dias_de_trial_minimo": 14,
+      "nunca_teve_desconto": true
+    },
+    "limite_por_contato": 1,
+    "limite_total_mensal": 0,
+    "validade_horas": 48
+  },
+  "sempre_exige_aprovacao_humana": [
+    "qualquer desconto fora das condições pré-aprovadas",
+    "desconto acumulado com outro desconto",
+    "desconto para contato já convertido",
+    "desconto vitalício ou por prazo indeterminado",
+    "isenção total",
+    "reembolso de qualquer natureza",
+    "alteração do valor do plano",
+    "criação de plano novo"
+  ],
+  "proibicoes": [
+    "A IA não cria condição comercial nova.",
+    "A IA não negocia valor em conversa livre.",
+    "A IA não promete desconto futuro.",
+    "A IA não usa urgência falsa nem escassez artificial para fechar.",
+    "Se o contato pedir desconto e não houver condição autorizada, a IA registra a objeção, explica o valor do produto e cria tarefa humana."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "proposto",
+  "descricao": "Limites operacionais de volume e de proteção. Verificados em código antes de todo envio.",
+  "globais_diarios": {
+    "whatsapp_iniciadas_pelo_negocio": 200,
+    "email_total": 500,
+    "chamadas_de_ia": 1000,
+    "observacao_whatsapp": "A Meta limita números novos a 250 destinatários únicos/24h fora da janela. 200 deixa margem."
+  },
+  "por_contato": {
+    "mensagens_recebidas_por_hora_antes_de_escalar": 20,
+    "descricao": "Acima disso, o atendimento é encaminhado a humano — pode ser abuso, automação ou pessoa em crise."
+  },
+  "tecnicos": {
+    "timeout_chamada_externa_segundos": 30,
+    "tentativas_maximas": 3,
+    "backoff_inicial_ms": 1000,
+    "backoff_multiplicador": 2,
+    "janela_deduplicacao_eventos_dias": 7,
+    "tolerancia_timestamp_segundos": 300,
+    "timeout_resposta_webhook_ms": 2000
+  },
+  "filas": {
+    "tamanho_maximo_fila_falhas": 1000,
+    "alerta_ao_atingir_percentual": 80,
+    "prazo_maximo_em_fila_horas": 24
+  },
+  "alertas": {
+    "erros_de_workflow_por_hora": 5,
+    "taxa_de_encaminhamento_humano_percentual": 40,
+    "tempo_primeira_resposta_minutos": 15,
+    "descricao_encaminhamento": "Encaminhar mais de 40% indica base de conhecimento insuficiente ou limiar de confiança mal calibrado."
+  }
+}

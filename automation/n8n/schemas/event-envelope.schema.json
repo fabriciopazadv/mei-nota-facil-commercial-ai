@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fabriciopazadv/mei-nota-facil-commercial-ai/schemas/event-envelope.json",
+  "title": "Envelope de evento — SaaS MEI Nota Fácil → Sistema Comercial",
+  "description": "Contrato normativo em docs/commercial-ai/integration-contract.md. Espelha src/events/schema.ts.",
+  "type": "object",
+  "required": ["event_id", "event_name", "event_version", "occurred_at"],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID v4 gerado na origem. Chave de idempotência, estável entre retentativas."
+    },
+    "event_name": {
+      "type": "string",
+      "enum": [
+        "lead_created", "account_created", "registration_started", "registration_completed",
+        "email_verified", "business_profile_completed", "first_client_created",
+        "first_budget_created", "first_receipt_created", "first_expense_created",
+        "first_revenue_created", "contract_analysis_started", "contract_analysis_completed",
+        "nfse_started", "nfse_completed", "premium_feature_viewed", "trial_started",
+        "trial_day_3", "trial_day_7", "trial_day_14", "trial_day_21", "trial_day_26",
+        "trial_day_29", "trial_expired", "checkout_started", "checkout_abandoned",
+        "payment_pending", "payment_approved", "payment_failed", "subscription_activated",
+        "user_inactive_3_days", "user_inactive_7_days", "user_inactive_15_days",
+        "cancellation_requested", "subscription_cancelled", "support_requested",
+        "nps_received", "referral_created"
+      ]
+    },
+    "event_version": { "type": "integer", "minimum": 1 },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC. Quando o fato ocorreu, não quando foi enviado."
+    },
+    "user_id": { "type": ["string", "null"], "minLength": 1 },
+    "tenant_id": { "type": ["string", "null"], "minLength": 1 },
+    "contact_id": { "type": ["string", "null"], "minLength": 1 },
+    "email": { "type": ["string", "null"], "format": "email" },
+    "phone": {
+      "type": ["string", "null"],
+      "pattern": "^\\+[1-9]\\d{7,14}$",
+      "description": "E.164 obrigatório. Formato local é rejeitado."
+    },
+    "source": { "type": ["string", "null"], "maxLength": 100 },
+    "campaign": { "type": ["string", "null"], "maxLength": 200 },
+    "plan": { "type": ["string", "null"], "enum": ["TRIAL", "MENSAL", "SEMESTRAL", null] },
+    "trial_day": { "type": ["integer", "null"], "minimum": 0, "maximum": 31 },
+    "metadata": {
+      "type": "object",
+      "description": "Objeto plano. NUNCA conteúdo de documento fiscal nem dado de cliente do MEI. Chaves proibidas em src/events/schema.ts → FORBIDDEN_METADATA_KEYS.",
+      "propertyNames": {
+        "not": {
+          "enum": [
+            "cpf", "cnpj", "customer_name", "customer_cpf", "customer_cnpj",
+            "customer_email", "customer_phone", "cliente_nome", "cliente_cpf",
+            "cliente_cnpj", "nfse_xml", "xml_content", "receipt_content",
+            "contract_text", "contrato_texto", "valor_nota", "valor_centavos",
+            "certificate", "certificado", "password", "senha", "token",
+            "access_token", "api_key"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "event_name": { "not": { "const": "lead_created" } } } },
+      "then": {
+        "required": ["user_id", "tenant_id", "email"],
+        "properties": {
+          "user_id": { "type": "string" },
+          "tenant_id": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

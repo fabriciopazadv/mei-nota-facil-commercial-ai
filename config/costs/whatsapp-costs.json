@@ -1,0 +1,70 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "nao_confirmado",
+  "fonte": "https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing",
+  "pais": "BR",
+  "moeda": "USD",
+  "aviso": "VALORES NÃO CONFIRMADOS. A página de preços da Meta recusou acesso automatizado (HTTP 403) na data da auditoria. Preencher com o rate card real do painel da Meta ANTES de qualquer envio pago. Enquanto status = nao_confirmado, o sistema usa estes valores apenas para ESTIMAR, com aviso explícito, e nunca para autorizar gasto.",
+  "modelo_de_cobranca": {
+    "unidade": "por_mensagem",
+    "observacao": "O modelo por conversa de 24h está descontinuado. A tarifa varia por categoria de template, país e faixa de volume.",
+    "verificado_em": "2026-07-24"
+  },
+  "categorias": {
+    "service": {
+      "custo_usd": 0,
+      "gratuito": true,
+      "descricao": "Mensagens de serviço não são cobradas.",
+      "confirmado": true
+    },
+    "utility_dentro_da_janela": {
+      "custo_usd": 0,
+      "gratuito": true,
+      "descricao": "Templates de utilidade enviados dentro da janela de atendimento são gratuitos desde 01/07/2025.",
+      "confirmado": true
+    },
+    "utility_fora_da_janela": {
+      "custo_usd": null,
+      "gratuito": false,
+      "descricao": "Aviso operacional fora da janela: fim de trial, falha de pagamento, confirmação.",
+      "confirmado": false
+    },
+    "authentication": {
+      "custo_usd": null,
+      "gratuito": false,
+      "descricao": "Códigos de verificação. Não usado atualmente pelo sistema comercial.",
+      "confirmado": false
+    },
+    "marketing": {
+      "custo_usd": null,
+      "gratuito": false,
+      "descricao": "Promoção e reativação. A categoria mais cara.",
+      "confirmado": false
+    }
+  },
+  "janela_de_atendimento": {
+    "duracao_horas": 24,
+    "abre_quando": "o usuário envia mensagem ou liga",
+    "renova": true,
+    "janela_aberta_permite": "qualquer tipo de mensagem, inclusive texto livre",
+    "janela_fechada_permite": "somente template aprovado",
+    "confirmado": true
+  },
+  "limites_de_envio": {
+    "numero_novo_destinatarios_unicos_24h": 250,
+    "primeiro_escalonamento": 1000,
+    "observacao": "Limite aplicado a destinatários únicos fora da janela de atendimento, em janela móvel de 24h. Qualidade baixa reduz o limite.",
+    "confirmado": true
+  },
+  "estrategia_de_reducao_de_custo": [
+    "Fazer o usuário escrever primeiro — cada conversa iniciada por ele é 24h gratuitas.",
+    "Usar utility, nunca marketing, para comunicação operacional.",
+    "Concentrar o atendimento dentro da janela aberta.",
+    "Uma mensagem completa em vez de várias fragmentadas.",
+    "E-mail como padrão; WhatsApp como exceção justificada.",
+    "Parar a sequência após resposta, conversão, cancelamento ou opt-out.",
+    "Agrupar notificações.",
+    "Registrar o custo estimado por campanha."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "ambiente": "staging",
+  "descricao": "Integração, homologação de workflows e simulação do fluxo completo.",
+  "envio_real_de_mensagens": true,
+  "destinatarios_permitidos": "apenas_numeros_e_emails_de_teste_cadastrados",
+  "escrita_no_hubspot": true,
+  "hubspot_alvo": "contatos_de_teste_ou_sandbox",
+  "chamadas_de_ia": true,
+  "dados_permitidos": "sinteticos",
+  "kill_switch_padrao": false,
+  "log_verboso": true,
+  "regras": [
+    "Envio real permitido SOMENTE para a lista de destinatários de teste.",
+    "Proibido usar dados de clientes reais.",
+    "Credenciais separadas das de produção — nunca reaproveitar.",
+    "Todo fluxo deve ser validado aqui antes de ir para produção."
+  ]
+}

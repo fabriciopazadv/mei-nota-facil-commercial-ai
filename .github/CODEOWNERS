@@ -1,0 +1,38 @@
+# Revisão obrigatória por arquivo.
+# O proprietário revisa tudo; os caminhos abaixo estão explícitos porque
+# governam dinheiro, autonomia da IA e conformidade.
+
+*                                   @fabriciopazadv
+
+# Políticas comerciais — desconto, scoring, frequência, retenção
+/config/commercial-rules/           @fabriciopazadv
+
+# Matriz de autonomia — o que a IA pode fazer sozinha
+/config/autonomy/                   @fabriciopazadv
+
+# Tetos de custo
+/config/costs/                      @fabriciopazadv
+/config/limits/                     @fabriciopazadv
+
+# Ambientes, especialmente produção
+/config/environments/               @fabriciopazadv
+
+# Prompts — o que os agentes dizem ao público
+/prompts/                           @fabriciopazadv
+
+# Base de conhecimento — a verdade sobre o produto
+/knowledge/                         @fabriciopazadv
+
+# Segurança e LGPD
+/SECURITY.md                        @fabriciopazadv
+/docs/commercial-ai/09-seguranca.md @fabriciopazadv
+/docs/commercial-ai/10-lgpd.md      @fabriciopazadv
+/docs/commercial-ai/lgpd-*.md       @fabriciopazadv
+/src/security/                      @fabriciopazadv
+/src/consent/                       @fabriciopazadv
+
+# Decisões arquiteturais
+/docs/commercial-ai/adr/            @fabriciopazadv
+
+# CI e configuração do repositório
+/.github/                           @fabriciopazadv

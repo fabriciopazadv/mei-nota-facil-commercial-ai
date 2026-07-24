@@ -1,0 +1,15 @@
+{
+  "ambiente": "development",
+  "descricao": "Desenvolvimento e testes locais. Nunca usa dados reais.",
+  "envio_real_de_mensagens": false,
+  "escrita_no_hubspot": false,
+  "chamadas_de_ia": true,
+  "dados_permitidos": "sinteticos",
+  "kill_switch_padrao": true,
+  "log_verboso": true,
+  "regras": [
+    "Proibido usar telefone, e-mail ou nome de cliente real.",
+    "Proibido usar token de produção.",
+    "Todo envio é simulado e registrado, nunca entregue."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "proposto",
+  "descricao": "Limites de frequência de contato. Protegem a qualidade do número de WhatsApp, o custo e a experiência do usuário. Verificados em código antes de todo envio (COM-18).",
+  "fuso_horario": "America/Sao_Paulo",
+  "janela_permitida": {
+    "dias_uteis": { "inicio": "09:00", "fim": "20:00" },
+    "sabado": { "inicio": "09:00", "fim": "13:00" },
+    "domingo_e_feriado": null,
+    "excecao": "Resposta a mensagem iniciada pelo usuário pode sair a qualquer hora — a pessoa escreveu primeiro."
+  },
+  "limites_por_contato": {
+    "whatsapp": {
+      "mensagens_iniciadas_por_semana": 2,
+      "mensagens_iniciadas_por_mes": 6,
+      "intervalo_minimo_horas": 48,
+      "tentativas_sem_resposta_antes_de_parar": 2
+    },
+    "email": {
+      "mensagens_por_semana": 3,
+      "mensagens_por_mes": 8,
+      "intervalo_minimo_horas": 24,
+      "tentativas_sem_resposta_antes_de_parar": 3
+    },
+    "total_todos_canais": {
+      "mensagens_iniciadas_por_semana": 4
+    }
+  },
+  "limites_globais_diarios": {
+    "whatsapp_mensagens_iniciadas": 200,
+    "observacao": "A Meta limita números novos a 250 destinatários únicos por 24h fora da janela de atendimento. O teto de 200 deixa margem de segurança."
+  },
+  "parada_imediata_de_sequencia": {
+    "descricao": "Ao ocorrer qualquer um destes, a sequência ativa é encerrada na hora. Sem 'última mensagem'.",
+    "gatilhos": [
+      "opt_out",
+      "resposta_do_contato",
+      "payment_approved",
+      "subscription_activated",
+      "cancellation_requested",
+      "subscription_cancelled",
+      "encaminhamento_humano",
+      "reclamacao_registrada",
+      "kill_switch_ativo"
+    ]
+  },
+  "excecoes_transacionais": {
+    "descricao": "Comunicações que decorrem de ação do próprio usuário e não contam nos limites acima.",
+    "eventos": [
+      "confirmacao_de_pagamento",
+      "falha_de_pagamento",
+      "verificacao_de_email",
+      "recuperacao_de_senha",
+      "resposta_a_ticket_de_suporte",
+      "resposta_a_mensagem_do_usuario"
+    ]
+  },
+  "regras": [
+    "Contato que não responde a duas tentativas entra em silêncio por 30 dias.",
+    "Uma mensagem que resolve vale mais que três que informam.",
+    "Nunca fragmentar em várias mensagens o que cabe em uma.",
+    "Nunca usar template de marketing para comunicação operacional.",
+    "Preferir e-mail quando o assunto não for urgente — é gratuito.",
+    "Preferir responder dentro da janela de 24h aberta pelo usuário — é gratuito."
+  ]
+}

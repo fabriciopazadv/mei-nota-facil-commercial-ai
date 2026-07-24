@@ -1,0 +1,85 @@
+{
+  "versao": "1.0.0",
+  "atualizado_em": "2026-07-24",
+  "status": "proposto",
+  "descricao": "Regras de retenção e reativação. O princípio é agir antes do pedido de cancelamento e respeitar o pedido quando ele vier.",
+  "deteccao_de_risco": {
+    "inatividade": {
+      "aviso_dias": 3,
+      "atencao_dias": 7,
+      "critico_dias": 15
+    },
+    "gatilhos_imediatos": [
+      "payment_failed",
+      "cancellation_requested",
+      "nps_detrator",
+      "reclamacao_registrada",
+      "segunda_falha_de_pagamento"
+    ]
+  },
+  "acoes_por_faixa_de_risco": {
+    "baixo": { "acao": "nenhuma", "canal": null },
+    "medio": { "acao": "conteudo_educativo", "canal": "email", "maximo_por_mes": 2 },
+    "alto": { "acao": "contato_retencao", "canal": "email_depois_whatsapp", "maximo_por_mes": 1 },
+    "critico": { "acao": "tarefa_humana", "prioridade": "alta", "prazo_horas": 4 }
+  },
+  "falha_de_pagamento": {
+    "tentativa_1": { "apos_horas": 2, "canal": "email", "tom": "informativo" },
+    "tentativa_2": { "apos_horas": 48, "canal": "whatsapp_ou_email", "tom": "informativo" },
+    "tentativa_3": { "apos_horas": 120, "canal": "email", "tom": "ultimo_aviso" },
+    "depois": "tarefa_humana",
+    "observacao": "Falha de pagamento tem consequência concreta para o usuário (perde acesso). Comunicar é serviço, não cobrança agressiva."
+  },
+  "cancelamento": {
+    "principio": "Cancelamento pedido é cancelamento respeitado.",
+    "maximo_de_alternativas_oferecidas": 1,
+    "exige_registro_de_motivo": true,
+    "motivos": [
+      "preco",
+      "nao_usou",
+      "faltou_recurso",
+      "problema_tecnico",
+      "fechou_mei",
+      "mudou_solucao",
+      "outro"
+    ],
+    "proibicoes": [
+      "Não dificultar o cancelamento.",
+      "Não insistir depois da reafirmação do pedido.",
+      "Não condicionar o cancelamento a atendimento humano obrigatório.",
+      "Não oferecer desconto fora da política para reter.",
+      "Não usar culpa, medo ou urgência falsa."
+    ],
+    "encaminhamento_humano_obrigatorio": [
+      "reclamacao_grave",
+      "pedido_de_reembolso",
+      "ameaca_judicial",
+      "acusacao_de_fraude",
+      "erro_fiscal_relevante",
+      "pessoa_emocionalmente_alterada"
+    ]
+  },
+  "reativacao": {
+    "prazo_minimo_apos_cancelamento_dias": 60,
+    "canal_preferencial": "email",
+    "maximo_tentativas": 2,
+    "intervalo_entre_tentativas_dias": 45,
+    "nao_reativar_se": [
+      "opt_out_registrado",
+      "motivo_cancelamento = fechou_mei",
+      "reclamacao_grave_registrada",
+      "pedido_expresso_de_nao_contato"
+    ],
+    "observacao_lgpd": "Reativação de ex-cliente após período longo pode exigir consentimento novo. Ver docs/commercial-ai/lgpd-base-legal.md §2.6 — pendente de validação jurídica."
+  },
+  "upgrade": {
+    "de": "mensal",
+    "para": "semestral",
+    "elegibilidade": {
+      "meses_ativo_minimo": 2,
+      "score_ativacao_minimo": 40,
+      "sem_falha_de_pagamento_recente": true
+    },
+    "maximo_ofertas_por_ano": 2
+  }
+}
